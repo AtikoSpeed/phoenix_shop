@@ -22,35 +22,35 @@
   We ship with two themes, a light one inspired on Phoenix colors and a dark one inspired
   on Elixir colors. Build your own at: https://daisyui.com/theme-generator/ */
 @plugin "../vendor/daisyui-theme" {
-  name: "dark";
-  default: false;
+  name: "atakan";
+  default: true;
   prefersdark: true;
   color-scheme: "dark";
-  --color-base-100: oklch(30.33% 0.016 252.42);
-  --color-base-200: oklch(25.26% 0.014 253.1);
-  --color-base-300: oklch(20.15% 0.012 254.09);
-  --color-base-content: oklch(97.807% 0.029 256.847);
-  --color-primary: oklch(58% 0.233 277.117);
-  --color-primary-content: oklch(96% 0.018 272.314);
-  --color-secondary: oklch(58% 0.233 277.117);
-  --color-secondary-content: oklch(96% 0.018 272.314);
-  --color-accent: oklch(60% 0.25 292.717);
-  --color-accent-content: oklch(96% 0.016 293.756);
-  --color-neutral: oklch(37% 0.044 257.287);
-  --color-neutral-content: oklch(98% 0.003 247.858);
-  --color-info: oklch(58% 0.158 241.966);
-  --color-info-content: oklch(97% 0.013 236.62);
-  --color-success: oklch(60% 0.118 184.704);
-  --color-success-content: oklch(98% 0.014 180.72);
-  --color-warning: oklch(66% 0.179 58.318);
-  --color-warning-content: oklch(98% 0.022 95.277);
-  --color-error: oklch(58% 0.253 17.585);
-  --color-error-content: oklch(96% 0.015 12.422);
-  --radius-selector: 0.25rem;
-  --radius-field: 0.25rem;
-  --radius-box: 0.5rem;
-  --size-selector: 0.21875rem;
-  --size-field: 0.21875rem;
+  --color-base-100: oklch(20% 0.08 209);
+  --color-base-200: oklch(15% 0.08 209);
+  --color-base-300: oklch(10% 0.08 209);
+  --color-base-content: oklch(98% 0.016 73.684);
+  --color-primary: oklch(92.78% 0.264 122.962);
+  --color-primary-content: oklch(0% 0 0);
+  --color-secondary: oklch(73.37% 0.224 48.25);
+  --color-secondary-content: oklch(14.674% 0.044 48.25);
+  --color-accent: oklch(71.9% 0.357 330.759);
+  --color-accent-content: oklch(18.556% 0.052 122.962);
+  --color-neutral: oklch(21.31% 0.128 278.68);
+  --color-neutral-content: oklch(84.262% 0.025 278.68);
+  --color-info: oklch(60.72% 0.227 252.05);
+  --color-info-content: oklch(12.144% 0.045 252.05);
+  --color-success: oklch(85.72% 0.266 158.53);
+  --color-success-content: oklch(17.144% 0.053 158.53);
+  --color-warning: oklch(91.01% 0.212 100.5);
+  --color-warning-content: oklch(18.202% 0.042 100.5);
+  --color-error: oklch(64.84% 0.293 29.349);
+  --color-error-content: oklch(12.968% 0.058 29.349);
+  --radius-selector: 0rem;
+  --radius-field: 0rem;
+  --radius-box: 0rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
   --border: 1.5px;
   --depth: 1;
   --noise: 0;
@@ -100,6 +100,9 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 /* Make LiveView wrapper divs transparent for layout */
-[data-phx-session], [data-phx-teleported-src] { display: contents }
+[data-phx-session],
+[data-phx-teleported-src] {
+  display: contents;
+}
 
 /* This file is for your main application CSS */
