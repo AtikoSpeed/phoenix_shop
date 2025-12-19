@@ -1,4 +1,5 @@
 import Config
+import Dotenvy
 
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the
@@ -16,6 +17,7 @@ import Config
 #
 # Alternatively, you can use `mix phx.gen.release` to generate a `bin/server`
 # script that automatically sets the env var above.
+
 if System.get_env("PHX_SERVER") do
   config :phoenix_shop, PhoenixShopWeb.Endpoint, server: true
 end
@@ -23,20 +25,22 @@ end
 config :phoenix_shop, PhoenixShopWeb.Endpoint,
   http: [port: String.to_integer(System.get_env("PORT", "4000"))]
 
-if config_env() == :prod do
-  database_url =
-    System.get_env("DATABASE_URL") ||
-      raise """
-      environment variable DATABASE_URL is missing.
-      For example: ecto://USER:PASS@HOST/DATABASE
-      """
+source!([".env", System.get_env()])
 
+if config_env() in [:dev, :test] do
+  config :phoenix_shop, PhoenixShop.Repo,
+    ssl: true,
+    url: env!("DATABASE_URL", :string),
+    pool_size: env!("POOL_SIZE", :integer, 10)
+end
+
+if config_env() == :prod do
   maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: []
 
   config :phoenix_shop, PhoenixShop.Repo,
-    # ssl: true,
-    url: database_url,
-    pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+    ssl: true,
+    url: env!("DATABASE_URL", :string),
+    pool_size: env!("POOL_SIZE", :integer, 10),
     # For machines with several cores, consider starting multiple pools of `pool_size`
     # pool_count: 4,
     socket_options: maybe_ipv6
@@ -46,16 +50,9 @@ if config_env() == :prod do
   # want to use a different value for prod and you most likely don't want
   # to check this value into version control, so we use an environment
   # variable instead.
-  secret_key_base =
-    System.get_env("SECRET_KEY_BASE") ||
-      raise """
-      environment variable SECRET_KEY_BASE is missing.
-      You can generate one by calling: mix phx.gen.secret
-      """
+  host = env!("PHX_HOST", :string, "atakan.shop")
 
-  host = System.get_env("PHX_HOST") || "example.com"
-
-  config :phoenix_shop, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
+  config :phoenix_shop, :dns_cluster_query, env!("DNS_CLUSTER_QUERY", :string?)
 
   config :phoenix_shop, PhoenixShopWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],
@@ -66,7 +63,7 @@ if config_env() == :prod do
       # for details about using IPv6 vs IPv4 and loopback vs public addresses.
       ip: {0, 0, 0, 0, 0, 0, 0, 0}
     ],
-    secret_key_base: secret_key_base
+    secret_key_base: env!("SECRET_KEY_BASE", :string!)
 
   # ## SSL Support
   #
