@@ -473,6 +473,9 @@ defmodule PhoenixShopWeb.CoreComponents do
     for {^field, {msg, opts}} <- errors, do: translate_error({msg, opts})
   end
 
+  # User defined components
+
+  attr :current_scope, :map, default: nil
   slot :inner_block
   slot :subtitle
   def header(assigns)
