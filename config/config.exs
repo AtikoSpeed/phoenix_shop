@@ -8,7 +8,8 @@
 import Config
 
 config :phoenix_shop,
-  generators: [timestamp_type: :utc_datetime]
+  ecto_repos: [PhoenixShop.Repo],
+  generators: [timestamp_type: :utc_datetime, binary_id: true]
 
 # Configure the endpoint
 config :phoenix_shop, PhoenixShopWeb.Endpoint,

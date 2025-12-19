@@ -9,6 +9,7 @@ defmodule PhoenixShop.Application do
   def start(_type, _args) do
     children = [
       PhoenixShopWeb.Telemetry,
+      PhoenixShop.Repo,
       {DNSCluster, query: Application.get_env(:phoenix_shop, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: PhoenixShop.PubSub},
       # Start a worker by calling: PhoenixShop.Worker.start_link(arg)
