@@ -8,6 +8,8 @@ defmodule PhoenixShop.Repo.Migrations.CreateUsersAuthTables do
       add :id, :binary_id, primary_key: true
       add :email, :citext, null: false
       add :hashed_password, :string
+      add :first_name, :string
+      add :last_name, :string
       add :confirmed_at, :utc_datetime
 
       timestamps(type: :utc_datetime)
