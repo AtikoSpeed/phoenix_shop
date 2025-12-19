@@ -52,8 +52,6 @@ defmodule PhoenixShopWeb do
     quote do
       use Phoenix.LiveView
 
-      import PhoenixShopWeb.Components.UI
-
       unquote(html_helpers())
     end
   end
@@ -61,8 +59,6 @@ defmodule PhoenixShopWeb do
   def live_component do
     quote do
       use Phoenix.LiveComponent
-
-      import PhoenixShopWeb.Components.UI
 
       unquote(html_helpers())
     end

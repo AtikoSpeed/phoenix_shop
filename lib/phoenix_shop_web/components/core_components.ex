@@ -472,4 +472,10 @@ defmodule PhoenixShopWeb.CoreComponents do
   def translate_errors(errors, field) when is_list(errors) do
     for {^field, {msg, opts}} <- errors, do: translate_error({msg, opts})
   end
+
+  slot :inner_block
+  slot :subtitle
+  def header(assigns)
+
+  embed_templates "ui/*"
 end

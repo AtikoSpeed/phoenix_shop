@@ -4,7 +4,6 @@ defmodule PhoenixShopWeb.Layouts do
   used by your application.
   """
   use PhoenixShopWeb, :html
-  import PhoenixShopWeb.Components.UI
   # Embed all files in layouts/* within this module.
   # The default root.html.heex file contains the HTML
   # skeleton of your application, namely HTML headers
