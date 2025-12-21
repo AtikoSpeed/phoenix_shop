@@ -116,6 +116,12 @@ defmodule PhoenixShop.Accounts.User do
     change(user, confirmed_at: now)
   end
 
+  def name_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:first_name, :last_name])
+    |> validate_required([:first_name, :last_name])
+  end
+
   @doc """
   Verifies the password.
 
