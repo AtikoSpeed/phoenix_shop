@@ -480,5 +480,9 @@ defmodule PhoenixShopWeb.CoreComponents do
   slot :subtitle
   def header(assigns)
 
+  attr :title, :string
+  attr :image, :string
+  def card(assigns)
+
   embed_templates "ui/*"
 end
