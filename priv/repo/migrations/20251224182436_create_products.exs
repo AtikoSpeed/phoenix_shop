@@ -5,7 +5,7 @@ defmodule PhoenixShop.Repo.Migrations.CreateProducts do
     create table(:products, primary_key: false) do
       add :id, :binary_id, primary_key: true
       add :title, :string
-      add :price, :float
+      add :price, :decimal
       add :description, :text
       add :category, :string
       add :image, :string

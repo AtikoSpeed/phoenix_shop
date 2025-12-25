@@ -6,7 +6,7 @@ defmodule PhoenixShop.Store.Product do
   @foreign_key_type :binary_id
   schema "products" do
     field :title, :string
-    field :price, :float
+    field :price, :decimal
     field :description, :string
     field :category, :string
     field :image, :string
