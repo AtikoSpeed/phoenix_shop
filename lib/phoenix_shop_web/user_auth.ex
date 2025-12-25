@@ -279,6 +279,17 @@ defmodule PhoenixShopWeb.UserAuth do
     end
   end
 
+  def require_admin(conn, _opts) do
+    if conn.assigns.current_scope.user.is_admin do
+      conn
+    else
+      conn
+      |> put_flash(:error, "Not authorized")
+      |> redirect(to: ~p"/")
+      |> halt()
+    end
+  end
+
   defp maybe_store_return_to(%{method: "GET"} = conn) do
     put_session(conn, :user_return_to, current_path(conn))
   end

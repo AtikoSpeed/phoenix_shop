@@ -24,6 +24,14 @@ defmodule PhoenixShopWeb.Router do
     get "/products", ProductsController, :index
   end
 
+  scope "/admin", PhoenixShopWeb.Admin do
+    pipe_through [:browser, :require_authenticated_user, :require_admin]
+
+    get "/", DashboardController, :index
+    resources "/products", ProductsController
+    resources "/users", UserController
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", PhoenixShopWeb do
   #   pipe_through :api
