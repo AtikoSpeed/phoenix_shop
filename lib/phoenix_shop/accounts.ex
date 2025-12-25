@@ -282,6 +282,13 @@ defmodule PhoenixShop.Accounts do
     :ok
   end
 
+  @doc """
+  Lists all users
+  """
+  def list_users do
+    Repo.all(User)
+  end
+
   ## Token helper
 
   defp update_user_and_delete_all_tokens(changeset) do
