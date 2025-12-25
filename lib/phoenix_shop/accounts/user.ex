@@ -10,6 +10,7 @@ defmodule PhoenixShop.Accounts.User do
     field :hashed_password, :string, redact: true
     field :first_name, :string
     field :last_name, :string
+    field :is_admin, :boolean, default: false
     field :confirmed_at, :utc_datetime
     field :authenticated_at, :utc_datetime, virtual: true
 
