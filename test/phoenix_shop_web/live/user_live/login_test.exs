@@ -75,17 +75,13 @@ defmodule PhoenixShopWeb.UserLive.LoginTest do
     end
   end
 
-  describe "login navigation" do
-    test "redirects to registration page when the Register button is clicked", %{conn: conn} do
-      {:ok, lv, _html} = live(conn, ~p"/users/log-in")
 
-      {:ok, _login_live, login_html} =
-        lv
-        |> element("main a", "Sign up")
-        |> render_click()
-        |> follow_redirect(conn, ~p"/users/register")
+  describe "header navigation" do
+    test "has a link to registration page", %{conn: conn} do
+      {:ok, _lv, html} = live(conn, ~p"/users/log-in")
 
-      assert login_html =~ "Register"
+      assert html =~ ~s(href="/users/register")
+      assert html =~ "Register"
     end
   end
 
