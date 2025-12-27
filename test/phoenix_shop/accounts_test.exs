@@ -7,6 +7,43 @@ defmodule PhoenixShop.AccountsTest do
   import PhoenixShop.AccountsFixtures
   alias PhoenixShop.Accounts.{User, UserToken}
 
+  describe "User schema" do
+    test "has all required fields" do
+      user = %User{}
+
+      assert Map.has_key?(user, :id)
+      assert Map.has_key?(user, :email)
+      assert Map.has_key?(user, :first_name)
+      assert Map.has_key?(user, :last_name)
+      assert Map.has_key?(user, :is_admin)
+      assert Map.has_key?(user, :hashed_password)
+      assert Map.has_key?(user, :confirmed_at)
+      assert Map.has_key?(user, :inserted_at)
+      assert Map.has_key?(user, :updated_at)
+    end
+
+    test "has correct default values" do
+      user = %User{}
+
+      assert user.is_admin == false
+    end
+
+    test "persists all fields to database" do
+      {:ok, user} =
+        %User{}
+        |> User.email_changeset(%{email: unique_user_email()})
+        |> User.name_changeset(%{first_name: "John", last_name: "Doe"})
+        |> Repo.insert()
+
+      db_user = Repo.get!(User, user.id)
+
+      assert db_user.email == user.email
+      assert db_user.first_name == "John"
+      assert db_user.last_name == "Doe"
+      assert db_user.is_admin == false
+    end
+  end
+
   describe "get_user_by_email/1" do
     test "does not return the user if the email does not exist" do
       refute Accounts.get_user_by_email("unknown@example.com")
